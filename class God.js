@@ -1,19 +1,14 @@
-class God {
+class God extends LivingCreature {
     constructor(x, y, index) {
-
-        this.x = x
-        this.y = y
+        super(x, y, index)
         this.energy = 0;
         this.live = 0
         this.mah = 0
         this.span = 0
         this.stexcel = 0
         this.vors = 0
-        this.index = index;
         this.directions = [];
     }
-
-
 
     getNewCoordinates() {
         this.directions = [
@@ -139,56 +134,29 @@ class God {
             [this.x + 4, this.y + 5],
             [this.x + 5, this.y + 5],
         ];
-
-
-
-
-
-
     }
 
     chooseCell(tiv, tiv1) {
-        this.getNewCoordinates()
-        var found = [];
-        for (var i = 0; i < this.directions.length; i++) {
-
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-
-                if (matrix[y][x] == tiv || matrix[y][x] == tiv1) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
+        this.getNewCoordinates()    
+        return super.chooseCell(tiv,tiv1);
     }
 
     move() {
-
         var emptyCells = this.chooseCell(0, 1)
         var newCell = random(emptyCells)
         if (newCell) {
             var Newx = newCell[0]
             var Newy = newCell[1]
-
             if (matrix[Newy][Newx] == 0) {
                 matrix[this.y][this.x] = 0
                 matrix[Newy][Newx] = this.index
             }
-
             if (matrix[Newy][Newx] == 1) {
                 matrix[this.y][this.x] = 1
                 matrix[Newy][Newx] = this.index
             }
-
-
             this.x = Newx
             this.y = Newy
-
-
-
         }
     }
     Create() {
@@ -204,7 +172,6 @@ class God {
             matrix[newCell[1]][newCell[0]] = 1;
             this.energy = 0;
         }
-
         var Newcell = random(this.chooseCell(0, 1));
         if (this.live >= 25 && Newcell) {
 
@@ -213,9 +180,6 @@ class God {
             matrix[Newcell[1]][Newcell[0]] = 2;
 
             this.live = 0
-
-
-
         }
 
         var Newcel = random(this.chooseCell(0, 1));
@@ -226,11 +190,7 @@ class God {
             matrix[Newcel[1]][Newcel[0]] = 3;
 
             this.stexcel = 0
-
-
-
         }
-
 
         var Newcl = random(this.chooseCell(0, 1));
         if (this.vors >= 100 && Newcl) {
@@ -239,20 +199,11 @@ class God {
             matrix[Newcl[1]][Newcl[0]] = 4;
 
             this.vors = 0
-
-
-
         }
-
-
-
-
-
     }
     die() {
 
         this.mah++
-
         if (this.mah >= (300)) {
             var Newx = this.x;
             var Newy = this.y;
@@ -267,25 +218,13 @@ class God {
             }
             this.mah = 0
         }
-
-
-
-
-
-
-
-
     }
-
 
     Kill() {
         this.span++
         var emptyCells = this.chooseCell(4)
         var newCell = random(emptyCells)
         if (this.span == 120 && newCell) {
-
-
-
             var Newx = newCell[0]
             var Newy = newCell[1]
 
@@ -299,11 +238,8 @@ class God {
                     break;
                 }
             }
-
             this.span = 0
             this.mah -= 10
         }
-
-
     }
 }
