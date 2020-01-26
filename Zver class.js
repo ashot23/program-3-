@@ -1,4 +1,4 @@
-class Zver extends LivingCreature {
+ class Zver extends LivingCreature {
     constructor(x, y, index) {
         super(x, y, index)
         this.energy = 15;
@@ -121,3 +121,5 @@ class Zver extends LivingCreature {
     }
 }
 
+
+module.exports.Zver=Zver

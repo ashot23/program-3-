@@ -1,4 +1,4 @@
-class Vorsord extends LivingCreature {
+ class Vorsord extends LivingCreature {
  constructor(x, y, index) {
 super(x,y,index)
         this.energy = 10;
@@ -133,3 +133,5 @@ super(x,y,index)
 }
 
 
+
+module.exports.Vorsord=Vorsord

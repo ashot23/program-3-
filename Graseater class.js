@@ -84,3 +84,5 @@ class GrassEater extends LivingCreature {
 }
 
 
+
+module.exports.GrassEater=GrassEater

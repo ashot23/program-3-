@@ -243,3 +243,5 @@ class God extends LivingCreature {
         }
     }
 }
+
+module.exports.God=God

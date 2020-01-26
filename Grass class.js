@@ -1,5 +1,5 @@
 
-class Grass extends LivingCreature {
+ class Grass extends LivingCreature {
     mul() {
         this.multiply++;
         var newCell = random(this.chooseCell(0));
@@ -12,3 +12,5 @@ class Grass extends LivingCreature {
         }
     }
 }
+
+module.exports.grass=Grass

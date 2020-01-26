@@ -16,7 +16,7 @@ var medikArr = []
 
 
 var side = 20
-var chap = 37
+var chap = 30
 
 function setup() {
 
@@ -110,6 +110,10 @@ function draw() {
 
 
             rect(x * side, y * side, side, side);
+
+
+
+
         }
     }
 
@@ -157,4 +161,11 @@ function draw() {
         medikArr[i].die()
 
     }
+
+
+
+
+
+
+
 }
