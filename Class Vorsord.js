@@ -1,4 +1,7 @@
- class Vorsord extends LivingCreature {
+var LivingCreature  = require('./LivingCreature')
+ 
+ 
+ module.exports =class Vorsord extends LivingCreature {
  constructor(x, y, index) {
 super(x,y,index)
         this.energy = 10;
@@ -64,7 +67,7 @@ super(x,y,index)
 
     move() {
         var emptyCells = this.chooseCell(0, 1)
-        var newCell = random(emptyCells)
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         if (newCell) {
             var Newx = newCell[0]
             var Newy = newCell[1]
@@ -86,8 +89,8 @@ super(x,y,index)
 
     eat() {
 
-        var emptyCells = this.chooseCell(3, 2)
-        var newCell = random(emptyCells)
+        var emptyCells = this.chooseCell(0)
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         if (newCell) {
             var Newx = newCell[0]
             var Newy = newCell[1]
@@ -134,4 +137,3 @@ super(x,y,index)
 
 
 
-module.exports.Vorsord=Vorsord

@@ -1,4 +1,6 @@
- class Zver extends LivingCreature {
+var LivingCreature = require('./LivingCreature')
+ 
+ module.exports =class Zver extends LivingCreature {
     constructor(x, y, index) {
         super(x, y, index)
         this.energy = 15;
@@ -45,8 +47,8 @@
         return super.chooseCell(tiv, tiv1)
     }
     move() {
-        var emptyCells = this.chooseCell(0, 1)
-        var newCell = random(emptyCells)
+        var emptyCells = this.chooseCell(0,1)
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         if (newCell) {
             var Newx = newCell[0]
             var Newy = newCell[1]
@@ -71,7 +73,7 @@
     eat() {
 
         var emptyCells = this.chooseCell(2)
-        var newCell = random(emptyCells)
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         if (newCell) {
 
             var Newx = newCell[0]
@@ -93,7 +95,8 @@
     }
 
     mul() {
-        var newCell = random(this.chooseCell(0));
+        var emptyCells = this.chooseCell(0)
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         if (this.energy >= 30 && newCell) {
             var neweat = new Zver(newCell[0], newCell[1], this.index);
             zverArr.push(neweat);
@@ -121,5 +124,3 @@
     }
 }
 
-
-module.exports.Zver=Zver

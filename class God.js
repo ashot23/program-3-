@@ -1,4 +1,6 @@
-class God extends LivingCreature {
+var LivingCreature = require('./LivingCreature')
+
+module.exports = class God extends LivingCreature {
     constructor(x, y, index) {
         super(x, y, index)
         this.energy = 0;
@@ -143,7 +145,7 @@ class God extends LivingCreature {
 
     move() {
         var emptyCells = this.chooseCell(0, 1)
-        var newCell = random(emptyCells)
+        var newCell = Math.floor(Math.random()*(emptyCells))
         if (newCell) {
             var Newx = newCell[0]
             var Newy = newCell[1]
@@ -164,39 +166,38 @@ class God extends LivingCreature {
         this.live++
         this.stexcel++
         this.vors++
-
-        var newCell = random(this.chooseCell(0));
+        var emptyCells = this.chooseCell(0)
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         if (this.energy >= 10 && newCell) {
             var neweat = new Grass(newCell[0], newCell[1], 1);
             grassArr.push(neweat);
             matrix[newCell[1]][newCell[0]] = 1;
             this.energy = 0;
         }
-        var Newcell = random(this.chooseCell(0, 1));
-        if (this.live >= 25 && Newcell) {
+        
+        
+        if (this.live >= 25 && newCell) {
 
-            var Neweat = new GrassEater(Newcell[0], Newcell[1], 2);
+            var Neweat = new GrassEater(newCell[0], newCell[1], 2);
             GrassEaterArr.push(Neweat);
-            matrix[Newcell[1]][Newcell[0]] = 2;
+            matrix[newCell[1]][newCell[0]] = 2;
 
             this.live = 0
         }
+       
+        if (this.stexcel >= 65 && newCell) {
 
-        var Newcel = random(this.chooseCell(0, 1));
-        if (this.stexcel >= 65 && Newcel) {
-
-            var zvers = new Zver(Newcel[0], Newcel[1], 3);
+            var zvers = new Zver(newCell[0], newCell[1], 3);
             zverArr.push(zvers);
-            matrix[Newcel[1]][Newcel[0]] = 3;
+            matrix[newCell[1]][newCell[0]] = 3;
 
             this.stexcel = 0
         }
-
-        var Newcl = random(this.chooseCell(0, 1));
-        if (this.vors >= 100 && Newcl) {
-            var vorso = new Vorsord(Newcl[0], Newcl[1], 4);
+    
+        if (this.vors >= 100 && newCell) {
+            var vorso = new Vorsord(newCell[0], newCell[1], 4);
             vorsordArr.push(vorso);
-            matrix[Newcl[1]][Newcl[0]] = 4;
+            matrix[newCell[1]][newCell[0]] = 4;
 
             this.vors = 0
         }
@@ -223,7 +224,7 @@ class God extends LivingCreature {
     Kill() {
         this.span++
         var emptyCells = this.chooseCell(4)
-        var newCell = random(emptyCells)
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         if (this.span == 120 && newCell) {
             var Newx = newCell[0]
             var Newy = newCell[1]
@@ -244,4 +245,3 @@ class God extends LivingCreature {
     }
 }
 
-module.exports.God=God
