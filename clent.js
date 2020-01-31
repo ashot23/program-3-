@@ -8,6 +8,8 @@ function setup() {
     background('#acacac');
 }
 
+
+
 function nkarel(matrix) {
     for (var y = 0; y < 31; y++) {
         for (var x = 0; x < 31; x++) {
@@ -15,7 +17,7 @@ function nkarel(matrix) {
                 fill("green");
             }
             else if (matrix[y][x] == 0) {
-                fill("#acacac");
+                fill('#acacac')
             }
             else if (matrix[y][x] == 2) {
                 fill("yellow");

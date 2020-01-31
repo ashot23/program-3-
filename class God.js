@@ -166,15 +166,16 @@ module.exports = class God extends LivingCreature {
         this.live++
         this.stexcel++
         this.vors++
-        var emptyCells = this.chooseCell(0)
-        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
-        if (this.energy >= 10 && newCell) {
-            var neweat = new Grass(newCell[0], newCell[1], 1);
+        var empty = this.chooseCell(0)
+        var newCel = empty[Math.floor(Math.random() * empty.length)]
+        if (this.energy >= 10 && newCel) {
+            var neweat = new Grass(newCel[0], newCel[1], 1);
             grassArr.push(neweat);
-            matrix[newCell[1]][newCell[0]] = 1;
+            matrix[newCel[1]][newCel[0]] = 1;
             this.energy = 0;
         }
-        
+        var emptyCells = this.chooseCell(0,1)
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         
         if (this.live >= 25 && newCell) {
 

@@ -22,7 +22,7 @@ medikArr = []
 
 
 var chap = 30
-var rand = [0,0,0,0,0,0,0,0,0,0,5] 
+var rand = [0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0] 
 for (var y = 0; y <= chap; ++y) {
     matrix[y] = []
 
