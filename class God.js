@@ -144,8 +144,8 @@ module.exports = class God extends LivingCreature {
     }
 
     move() {
-        var emptyCells = this.chooseCell(0, 1)
-        var newCell = Math.floor(Math.random()*(emptyCells))
+         var emptyCells = this.chooseCell(0,1)
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         if (newCell) {
             var Newx = newCell[0]
             var Newy = newCell[1]
@@ -205,7 +205,7 @@ module.exports = class God extends LivingCreature {
     die() {
 
         this.mah++
-        if (this.mah >= (300)) {
+        if (this.mah >= 300) {
             var Newx = this.x;
             var Newy = this.y;
             matrix[this.y][this.x] = 0

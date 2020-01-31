@@ -89,7 +89,7 @@ super(x,y,index)
 
     eat() {
 
-        var emptyCells = this.chooseCell(0)
+        var emptyCells = this.chooseCell(2,3)
         var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         if (newCell) {
             var Newx = newCell[0]

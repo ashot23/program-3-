@@ -9,8 +9,8 @@ function setup() {
 }
 
 function nkarel(matrix) {
-    for (var y = 0; y < 11; y++) {
-        for (var x = 0; x < 11; x++) {
+    for (var y = 0; y < 31; y++) {
+        for (var x = 0; x < 31; x++) {
             if (matrix[y][x] == 1) {
                 fill("green");
             }

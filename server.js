@@ -23,10 +23,10 @@ medikArr = []
 
 var chap = 30
 var rand = [0,0,0,0,0,0,0,0,0,0,5] 
-for (var y = 0; y <= 10; ++y) {
+for (var y = 0; y <= chap; ++y) {
     matrix[y] = []
 
-    for (var x = 0; x <= 10; x++) {
+    for (var x = 0; x <= chap; x++) {
         matrix[y][x] = random_item(rand) 
         
     }
@@ -39,6 +39,8 @@ return items[Math.floor(Math.random()*items.length)];
      
 }   
  
+
+
 io.sockets.emit('send matrix', matrix)
 
 
