@@ -18,6 +18,8 @@ function nkarel(matrix) {
             }
             else if (matrix[y][x] == 0) {
                 fill('#acacac')
+
+                
             }
             else if (matrix[y][x] == 2) {
                 fill("yellow");
@@ -33,7 +35,10 @@ function nkarel(matrix) {
             else if (matrix[y][x] == 5) {
                 fill("blue");
             }
-
+             else if (matrix[y][x] == 6) {
+                 fill('#541212')
+             }
+            
 
 
             rect(x * side, y * side, side, side);

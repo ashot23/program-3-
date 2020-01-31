@@ -18,10 +18,14 @@ GrassEaterArr = []
 zverArr = []
 vorsordArr = []
 medikArr = []
-
+DemonArr = []
 
 
 var chap = 30
+
+
+
+
 var rand = [0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0] 
 for (var y = 0; y <= chap; ++y) {
     matrix[y] = []
@@ -31,6 +35,15 @@ for (var y = 0; y <= chap; ++y) {
         
     }
 }
+
+function demoncreate(){
+
+    matrix[0].push(6)
+    
+    return matrix
+    
+    }
+    
         
         
 function random_item(items){
@@ -49,7 +62,7 @@ Vorsord = require('./Class Vorsord')
 God = require('./class God')
 Zver = require('./Zver class')
 GrassEater = require('./Graseater class')
-
+Demon = require('./Class Demon')
 function create(matrix) {
 
     for (var y = 0; y <= chap; y++) {
@@ -75,6 +88,10 @@ function create(matrix) {
     else if (matrix[y][x] == 5) {
         var Medik = new God(x, y, 5)
         medikArr.push(Medik)
+    }
+    else if (matrix[y][x] == 6) {
+        var Dem = new Demon(x, y, 6)
+        DemonArr.push(Dem)
     }
 
  
@@ -110,6 +127,13 @@ function game() {
         medikArr[i].Kill()
         medikArr[i].die()
     }
+
+    for (var i in DemonArr) {
+        DemonArr[i].move()
+        //DemonArr[i].Destroy()
+        //DemonArr[i].die()
+    }
+
     io.sockets.emit("send matrix", matrix);
 }
 
