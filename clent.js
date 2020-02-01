@@ -1,10 +1,10 @@
 var socket = io()
 
-var side = 20
-
+var side = 14
+var chap = 50
 
 function setup() {
-    createCanvas(30 * side, 30 * side);
+    createCanvas(50 * side, 50 * side);
     background('#acacac');
 }
 
@@ -12,8 +12,8 @@ col = ['#acacac', 'white']
 
 
 function nkarel(matrix) {
-    for (var y = 0; y < 31; y++) {
-        for (var x = 0; x < 31; x++) {
+    for (var y = 0; y < 51; y++) {
+        for (var x = 0; x < 51; x++) {
             if (matrix[y][x] == 1) {
                 fill("green");
             }
@@ -36,7 +36,7 @@ function nkarel(matrix) {
                 fill("blue");
             }
             else if (matrix[y][x] == 6) {
-                fill('#541212')
+                fill('#383235')
             }
 
 

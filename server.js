@@ -3,7 +3,6 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var fs = require("fs");
-
 app.use(express.static("."));
 
 app.get('/', function (req, res) {
@@ -21,7 +20,7 @@ medikArr = []
 DemonArr = []
 
 
-var chap = 30
+var chap = 50
 
 
 
@@ -140,10 +139,10 @@ setInterval(game, 1000)
 
 function snow() {
 
-    for (let y = 0; y < 31; y++) {
-        for (let x = 0; x < 31; y++) {
+    for (let y = 0; y < matrix.length; y++) {
+        for (let x = 0; x < matrix[y].length; y++) {
             if (matrix[y][x] == 0) {
-
+  fill("white")
 
             }
         }
@@ -155,7 +154,7 @@ function snow() {
 function demoncreate() {
     for (let y = 0; y < matrix.length; y++) {
         for (let x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x] == 0) {
+            if (matrix[y][x] == 0||matrix[y][x] ==1) {
                 var Dem = new Demon(x, y, 6);
                 DemonArr.push(Dem);
                 matrix[y][x] = 6;
@@ -186,6 +185,7 @@ io.on('connection', function (socket) {
     create(matrix)
     socket.on("demoncreate", demoncreate);
     socket.on("live", live);
+    socket.on("snow", snow);
 })
 
 var statistics = {};

@@ -7,104 +7,115 @@
 	<script src="socket.io/socket.io.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
 	<script src="clent.js"></script>
-	< <style>
-		#legend {position: absolute;top: 0;right: 0;width: 800px;} .legend-color {width: 30px;height: 30px;} td {border:
-		1px solid black; font-size: 14px; padding-left: 5px;}
-		#Snow{padding: 10px;font-size: 20px;text-shadow: 2px 1px white;font-family: 'Trebuchet MS', 'Lucida Sans
-		Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;border-radius: 20px;}
+	 <style>
+	    #legend {position: absolute;top: 0;right: 0;width: 800px;} .legend-color {width: 30px;height: 30px;} td {border: 1px solid black; font-size: 14px; padding-left: 5px;}
+		#Snow{padding: 10px;font-size: 20px;text-shadow: 2px 1px white;font-family: Georgia, 'Times New Roman', Times, serif;border-radius: 20px;}
 		#Demon{padding: 10px;font-size: 20px;text-shadow: 2px 1px red;font-family: 'Times New Roman', Times,
 		serif;border-radius: 20px;background-color: red}
 		#Start{padding: 10px;font-size: 20px;border-radius: 20px;font-family: 'Trebuchet MS', 'Lucida Sans Unicode',
 		'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: green;}
-		#Summer{text-shadow: 2px 1px green;padding: 10px;font-size: 20px;border-radius: 20px;font-family: 'Trebuchet
-		MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;}}
+		#Summer{text-shadow: 2px 1px green;padding: 10px;font-size: 20px;border-radius: 20px;font-family:'Courier New', Courier, monospace;color: black;}
 		</style>
 </head>
 
 <body>
+	<div style="align-items: flex-start" >
+
+	
 	<button onclick="snow()" id="Snow">Snow</button>
 	<button id="Summer">Summer</button>
 	<button id="Demon" onclick="demoncreate()">Destroys</button>
 	<button id="Start" onclick="live()">Start live</button>
-	<div class="container">
-		<table align="center" id="legend">
-			<tr>
-				<td class="legend-color">Գույն</td>
-				<td>Անվանում</td>
-				<td>Շարժվում է</td>
-				<td>Ուտում է</td>
-				<td>Բազմանում է</td>
-				<td>Սատկում է</td>
-				<td>Ստեղծում է</td>
-			</tr>
+</div>
 
-			<tr>
-				<td class="legend-color" style="background-color:gray"></td>
-				<td>Դատարկ վանդակներ</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td class="legend-color" style="background-color:green"></td>
-				<td>Խոտ</td>
-				<td></td>
-				<td></td>
-				<td>Մոտակա 8 վանդակներում, 4 տակտը մեկ</td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td class="legend-color" style="background-color:yellow"></td>
-				<td>Խոտակեր</td>
-				<td>Մոտակա 8 վանդակներում, էներգիան քչանում է 1֊ով</td>
-				<td>Խոտերին, մոտակա 8 վանդակներում, շարժվելիս էներգիան ավելանում է 1֊ով</td>
-				<td>Բազմանում է մոտակա տարածքներում, երբ էներգիան 10֊ից ավել է</td>
-				<td>Սատկում է, երբ էներգիան փոքր է 0֊ից</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td class="legend-color" style="background-color:red"></td>
-				<td>Գիշատիչ</td>
-				<td>Մոտակա 24 վանդակներում, էներգիան քչանում է 1֊ով</td>
-				<td>Խոտակերներին, մոտակա 24 վանդակներում, շարժվելիս էներգիան ավելանում է 4֊ով</td>
-				<td>Բազմանում է մոտակա տարածքներում, երբ էներգիան 30֊ից ավել է</td>
-				<td>Սատկում է, երբ էներգիան փոքր է -20֊ից</td>
-				<td></td>
-			</tr>
+<div class="container" >
+    <table align="center" id="legend">
+        <tr>
+            <td class="legend-color">Գույն</td>
+            <td>Անվանում</td>
+            <td>Շարժվում է</td>
+            <td>Ուտում է</td>
+            <td>Բազմանում է</td>
+            <td>Սատկում է</td>
+            <td>Ստեղծում է</td>
+        </tr>
 
-			<tr>
-				<td class="legend-color" style="background-color:black"></td>
-				<td>Վորսորդ</td>
-				<td>Մոտակա 48 վանդակներում, էներգիան քչանում է 1֊ով</td>
-				<td>Խոտակերներին և Գիշատիչին, մոտակա 48 վանդակներում,շարժվում է խոտի և դատարկ վանդակների վրայով
-					,շարժվելիս էներգիան ավելանում է 4֊ով</td>
-				<td></td>
-				<td>Սատկում է, երբ էներգիան փոքր է -20֊ից</td>
-				<td></td>
-			</tr>
+        <tr>
+            <td class="legend-color" style="background-color:gray"></td>
+            <td>Դատարկ վանդակներ</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="legend-color" style="background-color:green"></td>
+            <td>Խոտ</td>
+            <td></td>
+            <td></td>
+            <td>Մոտակա 8 վանդակներում, 4 տակտը մեկ</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="legend-color" style="background-color:yellow"></td>
+            <td>Խոտակեր</td>
+            <td>Մոտակա 8 վանդակներում, էներգիան քչանում է 1֊ով</td>
+            <td>Խոտերին, մոտակա 8 վանդակներում, շարժվելիս էներգիան ավելանում է 1֊ով</td>
+            <td>Բազմանում է մոտակա տարածքներում, երբ էներգիան 10֊ից ավել է</td>
+            <td>Սատկում է, երբ էներգիան փոքր է 0֊ից</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="legend-color" style="background-color:red"></td>
+            <td>Գիշատիչ</td>
+            <td>Մոտակա 24 վանդակներում, էներգիան քչանում է 1֊ով</td>
+            <td>Խոտակերներին, մոտակա 24 վանդակներում, շարժվելիս էներգիան ավելանում է 4֊ով</td>
+            <td>Բազմանում է մոտակա տարածքներում, երբ էներգիան 30֊ից ավել է</td>
+            <td>Սատկում է, երբ էներգիան փոքր է -20֊ից</td>
+            <td></td>
+        </tr>
 
-
-			<tr>
-				<td class="legend-color" style="background-color:blue"></td>
-				<td>Աստված</td>
-				<td>Մոտակա 120 վանդակներում, էներգիանները շատանում են 1֊ով</td>
-				<td>Վորսորդին երբ էներգիան հասնում է 120 ին, մոտակա 80 վանդակներում,շարժվում է խոտի և դատարկ վանդակների
-					վրայով</td>
-				<td></td>
-				<td>Սատկում է, երբ էներգիան հասնում է 200 ի</td>
-				<td>երբ 1-ին էներգիան հասնում է 10 ի Ստեղծում է խոտ,երբ 2-րդ էներգիան
-					հասնում է 25 ի Ստեղծում է Խոտակեր,երբ երրորդ էներգիան հասնում է
-					70-ի Ստեղծում է Գիշատիչ և երբ 4-րորդ էներգիան հասնում է 110 ի Ստեղծում է Վորսորդին:
-				</td>
-			</tr>
+        <tr>
+                <td class="legend-color" style="background-color:black"></td>
+                <td>Վորսորդ</td>
+                <td>Մոտակա 48 վանդակներում, էներգիան քչանում է 1֊ով</td>
+                <td>Խոտակերներին և Գիշատիչին, մոտակա 48 վանդակներում,շարժվում է խոտի և դատարկ վանդակների վրայով ,շարժվելիս էներգիան ավելանում է 4֊ով</td>
+                <td></td>
+                <td>Սատկում է, երբ էներգիան փոքր է -20֊ից</td>
+                <td></td>
+            </tr>
 
 
+            <tr>
+                    <td class="legend-color" style="background-color:blue"></td>
+                    <td>Աստված</td>
+                    <td>Մոտակա 120 վանդակներում, էներգիանները շատանում են 1֊ով</td>
+                    <td>Վորսորդին երբ էներգիան հասնում է 120 ին, մոտակա 80 վանդակներում,շարժվում է խոտի և դատարկ վանդակների վրայով</td>
+                    <td></td>
+                    <td>Սատկում է, երբ էներգիան հասնում է 200 ի</td>
+                    <td>երբ 1-ին էներգիան հասնում է 10 ի Ստեղծում է խոտ,երբ 2-րդ էներգիան
+                     հասնում է 25 ի Ստեղծում է  Խոտակեր,երբ երրորդ էներգիան հասնում է 
+                       70-ի Ստեղծում է Գիշատիչ և երբ 4-րորդ էներգիան հասնում է 110 ի Ստեղծում է Վորսորդին:
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td class="legend-color" style="background-color:#383235"></td>
+                    <td>Սատանա</td>
+                    <td>Մոտակա 121 վանդակներում,</td>
+                    <td>Բոլորին երբ հայտնվում է</td>
+                    <td></td>
+                    <td>Սատկում է,երբ սեխմում ենք Start live -ի վրա</td>
+                    <td>Երբ Սատկում է իր տեղը Ստեղծում է Աստված:
+                    </td>
+                </tr>
 
-		</table>
-	</div>
+
+    </table>
+</div>
+
 </body>
 
 </html>
