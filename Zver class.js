@@ -1,6 +1,6 @@
 var LivingCreature = require('./LivingCreature')
- 
- module.exports =class Zver extends LivingCreature {
+
+module.exports = class Zver extends LivingCreature {
     constructor(x, y, index) {
         super(x, y, index)
         this.energy = 15;
@@ -47,7 +47,7 @@ var LivingCreature = require('./LivingCreature')
         return super.chooseCell(tiv, tiv1)
     }
     move() {
-        var emptyCells = this.chooseCell(0,1)
+        var emptyCells = this.chooseCell(0, 1)
         var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         if (newCell) {
             var Newx = newCell[0]

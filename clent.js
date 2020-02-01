@@ -8,6 +8,7 @@ function setup() {
     background('#acacac');
 }
 
+col = ['#acacac', 'white']
 
 
 function nkarel(matrix) {
@@ -17,9 +18,8 @@ function nkarel(matrix) {
                 fill("green");
             }
             else if (matrix[y][x] == 0) {
-                fill('#acacac')
+                fill(col[0])
 
-                
             }
             else if (matrix[y][x] == 2) {
                 fill("yellow");
@@ -35,10 +35,10 @@ function nkarel(matrix) {
             else if (matrix[y][x] == 5) {
                 fill("blue");
             }
-             else if (matrix[y][x] == 6) {
-                 fill('#541212')
-             }
-            
+            else if (matrix[y][x] == 6) {
+                fill('#541212')
+            }
+
 
 
             rect(x * side, y * side, side, side);
@@ -51,6 +51,23 @@ function nkarel(matrix) {
 }
 setInterval(
     function () {
-    socket.on('send matrix', nkarel)
-    },1000
+        socket.on('send matrix', nkarel)
+    }, 1000
 )
+
+
+
+
+function snow() {
+    socket.emit("snow")
+}
+function demoncreate() {
+    socket.emit("demoncreate")
+
+
+}
+function live() {
+
+    socket.emit('live')
+
+}

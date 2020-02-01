@@ -1,29 +1,13 @@
-var LivingCreature = require('./LivingCreature')
 
+
+var LivingCreature = require('./LivingCreature')
 module.exports = class Demon extends LivingCreature {
     constructor(x, y, index) {
         super(x, y, index)
         this.directions = [];
     }
-
-
     getNewCoordinates() {
-
         this.directions = [
-            [this.x - 6, this.y - 6],
-            [this.x - 5, this.y - 6],
-            [this.x - 4, this.y - 6],
-            [this.x - 3, this.y - 6],
-            [this.x - 2, this.y - 6],
-            [this.x - 1, this.y - 6],
-            [this.x, this.y - 6],
-            [this.x + 1, this.y - 6],
-            [this.x + 2, this.y - 6],
-            [this.x + 3, this.y - 6],
-            [this.x + 4, this.y - 6],
-            [this.x + 5, this.y - 6],
-            [this.x + 6, this.y - 6],
-            [this.x - 6, this.y - 5],
             [this.x - 5, this.y - 5],
             [this.x - 4, this.y - 5],
             [this.x - 3, this.y - 5],
@@ -35,8 +19,6 @@ module.exports = class Demon extends LivingCreature {
             [this.x + 3, this.y - 5],
             [this.x + 4, this.y - 5],
             [this.x + 5, this.y - 5],
-            [this.x + 6, this.y - 5],
-            [this.x - 6, this.y - 4],
             [this.x - 5, this.y - 4],
             [this.x - 4, this.y - 4],
             [this.x - 3, this.y - 4],
@@ -49,8 +31,6 @@ module.exports = class Demon extends LivingCreature {
             [this.x + 3, this.y - 4],
             [this.x + 4, this.y - 4],
             [this.x + 5, this.y - 4],
-            [this.x + 6, this.y - 4],
-            [this.x - 6, this.y - 4],
             [this.x - 5, this.y - 4],
             [this.x - 4, this.y - 3],
             [this.x - 3, this.y - 3],
@@ -62,9 +42,7 @@ module.exports = class Demon extends LivingCreature {
             [this.x + 3, this.y - 3],
             [this.x + 4, this.y - 3],
             [this.x + 5, this.y - 3],
-            [this.x + 6, this.y - 3],
-            [this.x - 6, this.y - 3],
-            [this.x - 5, this.y - 3],
+            [this.x - 5, this.y - 2],
             [this.x - 4, this.y - 2],
             [this.x - 3, this.y - 2],
             [this.x - 2, this.y - 2],
@@ -75,8 +53,6 @@ module.exports = class Demon extends LivingCreature {
             [this.x + 3, this.y - 2],
             [this.x + 4, this.y - 2],
             [this.x + 5, this.y - 2],
-            [this.x + 6, this.y - 2],
-            [this.x - 6, this.y - 1],
             [this.x - 5, this.y - 1],
             [this.x - 4, this.y - 1],
             [this.x - 3, this.y - 1],
@@ -88,8 +64,6 @@ module.exports = class Demon extends LivingCreature {
             [this.x + 3, this.y - 1],
             [this.x + 4, this.y - 1],
             [this.x + 5, this.y - 1],
-            [this.x + 6, this.y - 1],
-            [this.x - 6, this.y],
             [this.x - 5, this.y],
             [this.x - 4, this.y],
             [this.x - 3, this.y],
@@ -100,8 +74,6 @@ module.exports = class Demon extends LivingCreature {
             [this.x + 3, this.y],
             [this.x + 4, this.y],
             [this.x + 5, this.y],
-            [this.x + 6, this.y],
-            [this.x - 6, this.y + 1],
             [this.x - 5, this.y + 1],
             [this.x - 4, this.y + 1],
             [this.x - 3, this.y + 1],
@@ -113,8 +85,6 @@ module.exports = class Demon extends LivingCreature {
             [this.x + 3, this.y + 1],
             [this.x + 4, this.y + 1],
             [this.x + 5, this.y + 1],
-            [this.x + 6, this.y + 1],
-            [this.x - 6, this.y + 2],
             [this.x - 5, this.y + 2],
             [this.x - 4, this.y + 2],
             [this.x - 3, this.y + 2],
@@ -126,8 +96,6 @@ module.exports = class Demon extends LivingCreature {
             [this.x + 3, this.y + 2],
             [this.x + 4, this.y + 2],
             [this.x + 5, this.y + 2],
-            [this.x + 6, this.y + 2],
-            [this.x - 6, this.y + 3],
             [this.x - 5, this.y + 3],
             [this.x - 4, this.y + 3],
             [this.x - 3, this.y + 3],
@@ -138,9 +106,7 @@ module.exports = class Demon extends LivingCreature {
             [this.x + 2, this.y + 3],
             [this.x + 3, this.y + 3],
             [this.x + 4, this.y + 3],
-            [this.x + 5, this.y - 3]
-            [this.x + 6, this.y + 3],
-            [this.x - 6, this.y + 4],
+            [this.x + 5, this.y + 3],
             [this.x - 5, this.y + 4],
             [this.x - 4, this.y + 4],
             [this.x - 3, this.y + 4],
@@ -152,8 +118,6 @@ module.exports = class Demon extends LivingCreature {
             [this.x + 3, this.y + 4],
             [this.x + 4, this.y + 4],
             [this.x + 5, this.y + 4],
-            [this.x + 6, this.y + 4],
-            [this.x - 6, this.y + 5],
             [this.x - 5, this.y + 5],
             [this.x - 4, this.y + 5],
             [this.x - 3, this.y + 5],
@@ -165,25 +129,13 @@ module.exports = class Demon extends LivingCreature {
             [this.x + 3, this.y + 5],
             [this.x + 4, this.y + 5],
             [this.x + 5, this.y + 5],
-            [this.x + 6, this.y + 5],
-            [this.x - 6, this.y + 6],
-            [this.x - 5, this.y + 6],
-            [this.x - 4, this.y + 6],
-            [this.x - 3, this.y + 6],
-            [this.x - 2, this.y + 6],
-            [this.x - 1, this.y + 6],
-            [this.x, this.y + 6],
-            [this.x + 1, this.y + 6],
-            [this.x + 2, this.y + 6],
-            [this.x + 3, this.y + 6],
-            [this.x + 4, this.y + 6],
-            [this.x + 5, this.y + 6],
-            [this.x + 6, this.y + 6],
         ];
+
+
     }
-
-
     chooseCell(tiv, tiv1, tiv2, tiv3, tiv4) {
+        this.getNewCoordinates()
+
         var found = [];
         for (var i = 0; i < this.directions.length; i++) {
 
@@ -199,26 +151,22 @@ module.exports = class Demon extends LivingCreature {
         }
         return found;
     }
+
     move() {
-        var emptyCells = this.chooseCell(0, 1)
+        var emptyCells = this.chooseCell(0)
         var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         if (newCell) {
             var Newx = newCell[0]
             var Newy = newCell[1]
-            if (matrix[Newy][Newx] == 0) {
-                matrix[this.y][this.x] = 0
-                matrix[Newy][Newx] = this.index
-            }
-            if (matrix[Newy][Newx] == 1) {
-                matrix[this.y][this.x] = 1
-                matrix[Newy][Newx] = this.index
-            }
+            matrix[this.y][this.x] = 0
+            matrix[Newy][Newx] = this.index
+
             this.x = Newx
             this.y = Newy
+            this.energy--
+
         }
     }
-
-
 
     Destroy() {
 
@@ -288,35 +236,4 @@ module.exports = class Demon extends LivingCreature {
 
         }
     }
-
-    die() {
-        var emptyCells = this.chooseCell(0, 1)
-        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
-
-        if (newCell) {
-            var Start = new God(newCel[0], newCel[1], 5);
-            medikArr.push(Start);
-            matrix[newCel[1]][newCel[0]] = 5;
-
-
-            var Newx = this.x;
-            var Newy = this.y;
-            matrix[this.y][this.x] = 0
-
-
-            for (var i in DemonArr) {
-                if (Newx == DemonArr[i].x && Newy == DemonArr[i].y) {
-                    DemonArr.splice(i, 1);
-                    break;
-                }
-            }
-
-
-
-
-
-        }
-
-    }
-
 }

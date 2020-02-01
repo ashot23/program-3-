@@ -26,25 +26,25 @@ var chap = 30
 
 
 
-var rand = [0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0] 
+var rand = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0]
 for (var y = 0; y <= chap; ++y) {
     matrix[y] = []
 
     for (var x = 0; x <= chap; x++) {
-        matrix[y][x] = random_item(rand) 
-        
+        matrix[y][x] = random_item(rand)
+
     }
 }
 
-    
-        
-        
-function random_item(items){
-  
-return items[Math.floor(Math.random()*items.length)];
-     
-}   
- 
+
+
+
+function random_item(items) {
+
+    return items[Math.floor(Math.random() * items.length)];
+
+}
+
 
 
 io.sockets.emit('send matrix', matrix)
@@ -56,38 +56,39 @@ God = require('./class God')
 Zver = require('./Zver class')
 GrassEater = require('./Graseater class')
 Demon = require('./Class Demon')
+
 function create(matrix) {
 
     for (var y = 0; y <= chap; y++) {
         for (var x = 0; x <= chap; x++) {
 
-    if (matrix[y][x] == 1) {
-        var gr = new Grass(x, y, 1);
-        grassArr.push(gr);
-    }
-    else if (matrix[y][x] == 2) {
-        var eat = new GrassEater(x, y, 2)
-        GrassEaterArr.push(eat)
-    }
-    else if (matrix[y][x] == 3) {
-        var zver = new Zver(x, y, 3)
-        zverArr.push(zver)
+            if (matrix[y][x] == 1) {
+                var gr = new Grass(x, y, 1);
+                grassArr.push(gr);
+            }
+            else if (matrix[y][x] == 2) {
+                var eat = new GrassEater(x, y, 2)
+                GrassEaterArr.push(eat)
+            }
+            else if (matrix[y][x] == 3) {
+                var zver = new Zver(x, y, 3)
+                zverArr.push(zver)
 
-    }
-    else if (matrix[y][x] == 4) {
-        var vorsord = new Vorsord(x, y, 4)
-        vorsordArr.push(vorsord)
-    }
-    else if (matrix[y][x] == 5) {
-        var Medik = new God(x, y, 5)
-        medikArr.push(Medik)
-    }
-    else if (matrix[y][x] == 6) {
-        var Dem = new Demon(x, y, 6)
-        DemonArr.push(Dem)
-    }
+            }
+            else if (matrix[y][x] == 4) {
+                var vorsord = new Vorsord(x, y, 4)
+                vorsordArr.push(vorsord)
+            }
+            else if (matrix[y][x] == 5) {
+                var Medik = new God(x, y, 5)
+                medikArr.push(Medik)
+            }
+            else if (matrix[y][x] == 6) {
+                var Dem = new Demon(x, y, 6)
+                DemonArr.push(Dem)
+            }
 
- 
+
         }
     }
 
@@ -96,32 +97,16 @@ function create(matrix) {
 }
 
 
-function demoncreate(){
 
-if(matrix[0].length-1==0){
 
-matrix[0].pop()
-matrix[0].push()
 
-}
-
-// for (var i in GrassEaterArr) {
-//     if (Newx == GrassEaterArr[i].x && Newy == GrassEaterArr[i].y) {
-//         GrassEaterArr.splice(i, 1);
-//         break;
-//     }
-// }
-    
-    return matrix
-    
-}
 
 
 function game() {
     for (var i in grassArr) {
         grassArr[i].mul()
     }
-   for (var i in GrassEaterArr) {
+    for (var i in GrassEaterArr) {
         GrassEaterArr[i].move();
         GrassEaterArr[i].eat();
         GrassEaterArr[i].mul();
@@ -146,15 +131,72 @@ function game() {
 
     for (var i in DemonArr) {
         DemonArr[i].move()
-        //DemonArr[i].Destroy()
-        //DemonArr[i].die()
+        DemonArr[i].Destroy()
     }
 
     io.sockets.emit("send matrix", matrix);
 }
-
 setInterval(game, 1000)
+
+function snow() {
+
+    for (let y = 0; y < 31; y++) {
+        for (let x = 0; x < 31; y++) {
+            if (matrix[y][x] == 0) {
+
+
+            }
+        }
+    }
+
+
+    io.sockets.emit("send matrix", matrix);
+}
+function demoncreate() {
+    for (let y = 0; y < matrix.length; y++) {
+        for (let x = 0; x < matrix[y].length; x++) {
+            if (matrix[y][x] == 0) {
+                var Dem = new Demon(x, y, 6);
+                DemonArr.push(Dem);
+                matrix[y][x] = 6;
+                break;
+            }
+        }
+    }
+}
+
+function live() {
+    DemonArr = []
+    for (let y = 0; y < matrix.length; y++) {
+        for (let x = 0; x < matrix[y].length; x++) {
+
+            if (matrix[y][x] == 6) {
+                matrix[y][x] = 5;
+                var Med = new God(x, y, 5)
+                medikArr.push(Med)
+
+            }
+        }
+    }
+}
+
+
 
 io.on('connection', function (socket) {
     create(matrix)
+    socket.on("demoncreate", demoncreate);
+    socket.on("live", live);
 })
+
+var statistics = {};
+
+setInterval(function () {
+    statistics.Grass = grassArr.length;
+    statistics.GrassEater = GrassEaterArr.length;
+    statistics.Zver = zverArr.length;
+    statistics.Vorsord = vorsordArr.length;
+    statistics.God = medikArr.length;
+    statistics.Demon = DemonArr.length;
+    fs.writeFile("statistics.json", JSON.stringify(statistics), function () {
+    })
+}, 1000)
