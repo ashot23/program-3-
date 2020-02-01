@@ -8,8 +8,6 @@ function setup() {
     background('#acacac');
 }
 
-col = ['#acacac', 'white']
-
 
 function nkarel(matrix) {
     for (var y = 0; y < 51; y++) {
@@ -18,9 +16,15 @@ function nkarel(matrix) {
                 fill("green");
             }
             else if (matrix[y][x] == 0) {
-                fill(col[0])
+                fill('#acacac')
 
             }
+
+            else if (matrix[y][x] == 0.5) {
+                fill('white')
+
+            }
+
             else if (matrix[y][x] == 2) {
                 fill("yellow");
             }
@@ -56,7 +60,11 @@ setInterval(
 )
 
 
+function summer(){
 
+    socket.emit("summer")
+
+}
 
 function snow() {
     socket.emit("snow")

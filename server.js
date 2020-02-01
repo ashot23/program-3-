@@ -13,6 +13,7 @@ server.listen(3000);
 
 matrix = [];
 grassArr = [];
+SnowArr = []
 GrassEaterArr = []
 zverArr = []
 vorsordArr = []
@@ -48,7 +49,7 @@ function random_item(items) {
 
 io.sockets.emit('send matrix', matrix)
 
-
+Snow = require('./class snow')
 Grass = require('./Grass class')
 Vorsord = require('./Class Vorsord')
 God = require('./class God')
@@ -60,6 +61,11 @@ function create(matrix) {
 
     for (var y = 0; y <= chap; y++) {
         for (var x = 0; x <= chap; x++) {
+
+            if (matrix[y][x] == 0.5) {
+                var sn = new Snow(x, y, 0.5);
+                SnowArr.push(sn);
+            }
 
             if (matrix[y][x] == 1) {
                 var gr = new Grass(x, y, 1);
@@ -105,6 +111,9 @@ function game() {
     for (var i in grassArr) {
         grassArr[i].mul()
     }
+    for (var i in SnowArr) {
+        SnowArr[i].mul()
+    }
     for (var i in GrassEaterArr) {
         GrassEaterArr[i].move();
         GrassEaterArr[i].eat();
@@ -138,23 +147,41 @@ function game() {
 setInterval(game, 1000)
 
 function snow() {
-
-    for (let y = 0; y < matrix.length; y++) {
-        for (let x = 0; x < matrix[y].length; y++) {
-            if (matrix[y][x] == 0) {
-  fill("white")
-
-            }
+    for (var i = 0; i < 50; i++) {
+        var x = Math.floor(Math.random() * matrix[0].length)
+        var y = Math.floor(Math.random() * matrix.length)
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 0.5
+            var sn = new Snow(x, y, 0.5)
+            SnowArr.push(sn)
         }
     }
-
-
     io.sockets.emit("send matrix", matrix);
 }
+
+function summer() {
+SnowArr = []
+    for (let y = 0; y < matrix.length; y++) {
+        for (let x = 0; x < matrix[y].length; x++) {
+            if (matrix[y][x] == (0.5)) {
+                matrix[y][x] = 1
+                var gr = new Grass(x, y, 1);
+                grassArr.push(gr);
+            }
+
+
+        }
+
+    }
+    io.sockets.emit("send matrix", matrix);
+
+}
+
+
 function demoncreate() {
     for (let y = 0; y < matrix.length; y++) {
         for (let x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x] == 0||matrix[y][x] ==1) {
+            if (matrix[y][x] == 0 || matrix[y][x] == 1) {
                 var Dem = new Demon(x, y, 6);
                 DemonArr.push(Dem);
                 matrix[y][x] = 6;
@@ -162,6 +189,7 @@ function demoncreate() {
             }
         }
     }
+    io.sockets.emit("send matrix", matrix);
 }
 
 function live() {
@@ -177,6 +205,7 @@ function live() {
             }
         }
     }
+    io.sockets.emit("send matrix", matrix);
 }
 
 
@@ -186,6 +215,7 @@ io.on('connection', function (socket) {
     socket.on("demoncreate", demoncreate);
     socket.on("live", live);
     socket.on("snow", snow);
+    socket.on('summer',summer)
 })
 
 var statistics = {};
@@ -197,6 +227,7 @@ setInterval(function () {
     statistics.Vorsord = vorsordArr.length;
     statistics.God = medikArr.length;
     statistics.Demon = DemonArr.length;
+    statistics.Snow = SnowArr.length;
     fs.writeFile("statistics.json", JSON.stringify(statistics), function () {
     })
 }, 1000)

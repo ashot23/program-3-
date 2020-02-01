@@ -133,7 +133,7 @@ module.exports = class Demon extends LivingCreature {
 
 
     }
-    chooseCell(tiv, tiv1, tiv2, tiv3, tiv4) {
+    chooseCell(tiv, tiv1, tiv2, tiv3, tiv4,tiv5) {
         this.getNewCoordinates()
 
         var found = [];
@@ -171,11 +171,21 @@ module.exports = class Demon extends LivingCreature {
     Destroy() {
 
 
-        var emptyCells = this.chooseCell(1, 2, 3, 4, 5)
+        var emptyCells = this.chooseCell(0.5,1, 2, 3, 4, 5)
         var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         if (newCell) {
             var Newx = newCell[0]
             var Newy = newCell[1]
+
+            if (matrix[Newy][Newx] == 0.5) {
+                for (var i in SnowArr) {
+                    if (Newx == SnowArr[i].x && Newy == SnowArr[i].y) {
+                        SnowArr.splice(i, 1);
+                        break;
+                    }
+                }
+            }
+
 
             if (matrix[Newy][Newx] == 1) {
                 for (var i in grassArr) {
