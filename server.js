@@ -36,13 +36,6 @@ for (var y = 0; y <= chap; ++y) {
     }
 }
 
-function demoncreate(){
-
-    matrix[0].push(6)
-    
-    return matrix
-    
-    }
     
         
         
@@ -101,6 +94,29 @@ function create(matrix) {
     io.sockets.emit('send matrix', matrix)
 
 }
+
+
+function demoncreate(){
+
+if(matrix[0].length-1==0){
+
+matrix[0].pop()
+matrix[0].push()
+
+}
+
+// for (var i in GrassEaterArr) {
+//     if (Newx == GrassEaterArr[i].x && Newy == GrassEaterArr[i].y) {
+//         GrassEaterArr.splice(i, 1);
+//         break;
+//     }
+// }
+    
+    return matrix
+    
+}
+
+
 function game() {
     for (var i in grassArr) {
         grassArr[i].mul()
