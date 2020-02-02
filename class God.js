@@ -4,11 +4,11 @@ module.exports = class God extends LivingCreature {
     constructor(x, y, index) {
         super(x, y, index)
         this.energy = 0;
-        this.live = 0
-        this.mah = 0
-        this.span = 0
-        this.stexcel = 0
-        this.vors = 0
+        this.live = 0;
+        this.mah = 0;
+        this.span = 0;
+        this.stexcel = 0;
+        this.vors = 0;
         this.directions = [];
     }
 
@@ -158,10 +158,10 @@ module.exports = class God extends LivingCreature {
 
     move() {
         var emptyCells = this.chooseCell(0, 1, 0.5)
-        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
         if (newCell) {
-            var Newx = newCell[0]
-            var Newy = newCell[1]
+            var Newx = newCell[0];
+            var Newy = newCell[1];
             if (matrix[Newy][Newx] == 0) {
                 matrix[this.y][this.x] = 0
                 matrix[Newy][Newx] = this.index
@@ -175,8 +175,8 @@ module.exports = class God extends LivingCreature {
                 matrix[Newy][Newx] = this.index
             }
 
-            this.x = Newx
-            this.y = Newy
+            this.x = Newx;
+            this.y = Newy;
         }
     }
     Create() {
@@ -185,7 +185,7 @@ module.exports = class God extends LivingCreature {
         this.stexcel++
         this.vors++
         var empty = this.chooseCell(0)
-        var news = empty[Math.floor(Math.random() * empty.length)]
+        var news = empty[Math.floor(Math.random() * empty.length)];
         if (this.energy >= 10 && news) {
             var neweat = new Grass(news[0], news[1], 1);
             grassArr.push(neweat);

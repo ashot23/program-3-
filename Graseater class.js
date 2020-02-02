@@ -17,12 +17,25 @@ module.exports =class GrassEater extends LivingCreature {
             [this.x + 1, this.y + 1]
         ];
     }
-    chooseCell(tiv, tiv1) {
+    chooseCell(tiv, tiv1,tiv2) {
         this.getNewCoordinates()
-        return super.chooseCell(tiv, tiv1)
+        var found = [];
+        for (var i = 0; i < this.directions.length; i++) {
+    
+            var x = this.directions[i][0];
+            var y = this.directions[i][1];
+    
+            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
+    
+                if (matrix[y][x] == tiv || matrix[y][x] == tiv1|| matrix[y][x] == tiv2) {
+                    found.push(this.directions[i]);
+                }
+            }
+        }
+        return found;
     }
     move() {
-        var emptyCells = this.chooseCell(0)
+        var emptyCells = this.chooseCell(0,0.5)
         var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         if (newCell) {
             var Newx = newCell[0]
@@ -30,6 +43,10 @@ module.exports =class GrassEater extends LivingCreature {
             matrix[this.y][this.x] = 0
             matrix[Newy][Newx] = this.index
 
+            if (matrix[Newy][Newx] == 0.5) {
+                matrix[this.y][this.x] = 0.5
+                matrix[Newy][Newx] = this.index
+            }
             this.x = Newx
             this.y = Newy
             this.energy--
