@@ -157,7 +157,7 @@ module.exports = class God extends LivingCreature {
     }
 
     move() {
-        var emptyCells = this.chooseCell(0, 1)
+        var emptyCells = this.chooseCell(0, 1, 0.5)
         var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         if (newCell) {
             var Newx = newCell[0]
@@ -170,6 +170,11 @@ module.exports = class God extends LivingCreature {
                 matrix[this.y][this.x] = 1
                 matrix[Newy][Newx] = this.index
             }
+            if (matrix[Newy][Newx] == 0.5) {
+                matrix[this.y][this.x] = 0.5
+                matrix[Newy][Newx] = this.index
+            }
+
             this.x = Newx
             this.y = Newy
         }
@@ -180,82 +185,54 @@ module.exports = class God extends LivingCreature {
         this.stexcel++
         this.vors++
         var empty = this.chooseCell(0)
-        var newCel = empty[Math.floor(Math.random() * empty.length)]
-        if (this.energy >= 10 && newCel) {
-            var neweat = new Grass(newCel[0], newCel[1], 1);
+        var news = empty[Math.floor(Math.random() * empty.length)]
+        if (this.energy >= 10 && news) {
+            var neweat = new Grass(news[0], news[1], 1);
             grassArr.push(neweat);
-            matrix[newCel[1]][newCel[0]] = 1;
+            matrix[news[1]][news[0]] = 1;
             this.energy = 0;
         }
-        var emptyCells = this.chooseCell(0, 1)
-        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
-        if (this.live >= 25 && newCell) {
-            var Neweat = new GrassEater(newCell[0], newCell[1], 2);
+        var Cells = this.chooseCell(0, 1, 0.5)
+        var Newcell = Cells[Math.floor(Math.random() * Cells.length)]
+
+        if (this.live >= 25 && Newcell) {
+
+            var Neweat = new GrassEater(Newcell[0], Newcell[1], 2);
             GrassEaterArr.push(Neweat);
-            matrix[newCell[1]][newCell[0]] = 2;
+            matrix[Newcell[1]][Newcell[0]] = 2;
 
             this.live = 0
-        }
 
-        var Cells = this.chooseCell(0, 1, 2)
-        var newe = Cells[Math.floor(Math.random() * Cells.length)]
-        var Newx = newe[0];
-        var Newy = newe[1];
-        if (this.stexcel >= 65 && newe) {
-            if (matrix[Newy][Newx] == 0) {
-                var pred = new Zver(Newx, Newy, 3);
-                zverArr.push(pred);
-                matrix[Newy][Newy] = 3;
 
-                this.stexcel = 0
-            }
-            if (matrix[Newy][Newx] == 1) {
 
-                for (var i in grassArr) {
-                    if (Newx == grassArr[i].x && Newy == grassArr[i].y) {
-                        grassArr.splice(i, 1);
-                        break;
+            if (this.stexcel >= 65 && Newcell) {
 
-                    }
-                }
-
-                var zve = new Zver(Newx, Newy, 3);
-                zverArr.push(zve);
-                matrix[Newy][Newy] = 3;
+                var zvers = new Zver(Newcell[0], Newcell[1], 3);
+                zverArr.push(zvers);
+                matrix[Newcell[1]][Newcell[0]] = 3;
 
                 this.stexcel = 0
 
+
+
             }
 
 
-        }
+
+            if (this.vors >= 100 && Newcell) {
+                var vorso = new Vorsord(Newcell[0], Newcell[1], 4);
+                vorsordArr.push(vorso);
+                matrix[Newcell[1]][Newcell[0]] = 4;
+
+                this.vors = 0
 
 
 
-
-        if (matrix[Newy][Newx] == 2) {
-
-            for (var i in GrassEaterArr) {
-                if (Newx == GrassEaterArr[i].x && Newy == GrassEaterArr[i].y) {
-                    GrassEaterArr.splice(i, 1);
-                    break;
-
-                }
             }
-            var zver = new Zver(Newx, Newy, 3);
-            zverArr.push(zver);
-            matrix[Newy][Newy] = 3;
-            this.stexcel = 0
         }
-
-        if (this.vors >= 100 && newe) {
-            var vors = new Vorsord(newCell[1], newCell[0], 4)
-            vorsordArr.push(vors)
-            matrix[newCell[0]][newCell[1]]
-            this.vors = 0
-        }
-
     }
+
+
     die() {
 
         this.mah++

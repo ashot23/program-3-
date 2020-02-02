@@ -144,7 +144,7 @@ module.exports = class Demon extends LivingCreature {
 
             if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
 
-                if (matrix[y][x] == tiv || matrix[y][x] == tiv1 || matrix[y][x] == tiv2 || matrix[y][x] == tiv3 || matrix[y][x] == tiv4) {
+                if (matrix[y][x] == tiv || matrix[y][x] == tiv1 || matrix[y][x] == tiv2 || matrix[y][x] == tiv3 || matrix[y][x] == tiv4|| matrix[y][x] == tiv5) {
                     found.push(this.directions[i]);
                 }
             }
@@ -239,8 +239,7 @@ module.exports = class Demon extends LivingCreature {
 
 
 
-            matrix[Newy][Newx] = this.index
-            matrix[this.y][this.x] = 0
+            matrix[Newy][Newx] = 0 
             this.x = Newx
             this.y = Newy
 
