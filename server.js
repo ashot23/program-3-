@@ -198,13 +198,23 @@ function live() {
         for (let x = 0; x < matrix[y].length; x++) {
 
             if (matrix[y][x] == 6) {
-                matrix[y][x] = 5;
-                var Med = new God(x, y, 5)
-                medikArr.push(Med)
-
+                matrix[y][x] = 0;
             }
         }
     }
+
+for(let i =0;i<3;i++){
+
+    var u = Math.floor(Math.random() * matrix[0].length)
+    var o = Math.floor(Math.random() * matrix.length)
+    if (matrix[o][u] == 0) {
+        matrix[o][u] = 5
+        var med = new God(u, o, 5)
+        medikArr.push(med)
+    }
+}
+
+
     io.sockets.emit("send matrix", matrix);
 }
 
